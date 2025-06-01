@@ -1,0 +1,48 @@
+<div class="container py-5">
+  <div *ngIf="errorMessage" class="alert alert-danger text-center shadow-sm rounded">
+    {{ errorMessage }}
+  </div>
+
+  <div class="card shadow-lg rounded-4">
+    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+      <h4 class="mb-0 text-dark">Manage All Courses</h4>
+      <button class="btn btn-success rounded-pill" (click)="createCourseRequest()">+ Create Course</button>
+    </div>
+
+    <div class="card-body p-4">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Created On</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of courseList; index as ind">
+              <td>{{ ind + 1 }}</td>
+              <td class="fw-semibold">{{ item.title }}</td>
+              <td class="text-success">{{ item.price | currency: 'USD' }}</td>
+              <td class="text-muted">{{ item.createTime | date: 'medium' }}</td>
+              <td>
+                <button class="btn btn-outline-primary btn-sm me-2" (click)="editCourseRequest(item)">
+                  Edit
+                </button>
+                <button class="btn btn-outline-danger btn-sm" (click)="deleteCourseRequest(item)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals / Dialog Components -->
+  <app-course-save [course]="selectedCourse" (save)="saveCourseWatcher($event)"></app-course-save>
+  <app-course-delete (confirmed)="deleteCourse()"></app-course-delete>
+</div>

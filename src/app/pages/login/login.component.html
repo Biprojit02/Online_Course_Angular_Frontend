@@ -1,0 +1,58 @@
+<div class="container d-flex justify-content-center align-items-center mt-5" style="min-height: 80vh;">
+  <div class="card p-4 shadow-lg rounded-4" style="width: 400px;">
+
+    <div class="text-center mb-3">
+      <fa-icon [icon]="faUser" class="text-primary" style="font-size: 3rem;"></fa-icon>
+      <h4 class="mt-2 fw-semibold">Welcome Back</h4>
+      <p class="text-muted small">Sign in to continue</p>
+    </div>
+
+    <form #f="ngForm" (ngSubmit)="f.form.valid && login()">
+      <div *ngIf="errorMessage" class="alert alert-danger text-center">
+        {{ errorMessage }}
+      </div>
+
+      <div class="mb-3">
+        <label for="username" class="form-label fw-semibold">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="user.username"
+          #username="ngModel"
+          class="form-control"
+          required
+        />
+        <div class="text-danger small mt-1" *ngIf="!username.valid && f.submitted">
+          Username is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label fw-semibold">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="user.password"
+          #password="ngModel"
+          class="form-control"
+          required
+        />
+        <div class="text-danger small mt-1" *ngIf="!password.valid && f.submitted">
+          Password is required.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 rounded-pill mt-2">
+        Sign In
+      </button>
+    </form>
+
+    <div class="text-center mt-3">
+      <a [routerLink]="['/register']" class="text-decoration-none text-muted">
+        Don’t have an account? <strong>Create one!</strong>
+      </a>
+    </div>
+  </div>
+</div>

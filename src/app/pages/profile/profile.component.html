@@ -1,0 +1,39 @@
+<div class="container py-5">
+
+  <div *ngIf="errorMessage" class="alert alert-danger text-center shadow-sm rounded">
+    {{ errorMessage }}
+  </div>
+
+  <div class="card shadow-lg rounded-4">
+    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+      <h4 class="mb-0 text-primary">All Purchased Courses</h4>
+      <span class="text-muted small">
+        Current Role: <strong>{{ currentUser?.role }}</strong>
+      </span>
+    </div>
+
+    <div class="card-body p-4">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Purchase Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of purchaseList; index as ind">
+              <td>{{ ind + 1 }}</td>
+              <td class="fw-semibold">{{ item.title }}</td>
+              <td class="text-success">{{ item.price | currency: 'INR' }}</td>
+              <td class="text-muted">{{ item.purchaseTime | date: 'medium' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
